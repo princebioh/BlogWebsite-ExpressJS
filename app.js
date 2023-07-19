@@ -29,16 +29,17 @@ app.get("/contact", (req,res) => {
     res.render("contact", {body : contactContent});
 });
 
-app.get("/compose", (req,res) => {
-    res.render("compose");
-});
 
-app.post("/compose", (req,res) => {
-    title = req.body.title;
-    var userPost = {
-        title : req.body.title,
-        post : req.body.post,
-    };
-    blogPosts.push(userPost);
-    res.redirect("/");
-})
+app.route("/compose")
+    .get((req,res) => {
+        res.render("compose");
+    })
+    .post((req,res) => {
+        // Create UserPost Object with tile and post as keys
+        var userPost = {
+            title : req.body.title,
+            post : req.body.post,
+        };
+        blogPosts.push(userPost);
+        res.redirect("/");
+    })
