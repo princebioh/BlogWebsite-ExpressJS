@@ -49,15 +49,22 @@ app.route("/posts/:postTitle")
     .get((req,res) => { 
         urlParam = _.lowerCase(req.params.postTitle);
 
-        blogPosts.forEach((post) => {     
-            if(_.lowerCase(post.title) === urlParam){
-                res.render("posts",{postContent : post});   
+        // blogPosts.forEach((post) => {     
+        //     if(_.lowerCase(post.title) === urlParam){
+        //         res.render("posts",{postContent : post});   
+        //     }
+        //     else{
+        //         console.log("No Match");
+        //         res.send("Post Not Found!")
+        //     }
+        // });
+
+        for(i = 0; i< blogPosts.length; i++){
+            if(_.lowerCase(blogPosts[i].title) === urlParam){
+                console.log(blogPosts[i]);
+                res.render("posts", {postContent: blogPosts[i]});
             }
-            else{
-                console.log("No Match");
-                res.send("Post Not Found!")
-            }
-        });
+        }
     });
 
 
